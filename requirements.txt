@@ -1,0 +1,6 @@
+load_dotenv
+os
+asyncio
+aiohttp
+discord
+dotenv
