@@ -4,12 +4,28 @@
 import os
 import io
 import discord
-from discord.ext import commands
+from discord.ext import commands, tasks
 from discord import app_commands
 from dotenv import load_dotenv
 import asyncio
 import aiohttp
-from discord.ext import commands, tasks
+
+from flask import Flask
+import threading
+
+# Flask app
+app = Flask(__name__)
+
+@app.route('/')
+def home():
+    return "Bot is alive!"
+
+def run_web():
+    port = int(os.environ.get("PORT", 10000))
+    app.run(host="0.0.0.0", port=port)
+
+# Start Flask server in background thread
+threading.Thread(target=run_web).start()
 
 # =========================
 # Load environment
